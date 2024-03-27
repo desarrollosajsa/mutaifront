@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { CasoModule } from './caso/caso.module';
 import { LoginModule } from './login/login.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { LoginModule } from './login/login.module';
     HomeModule,
     CasoModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

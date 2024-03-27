@@ -27,6 +27,19 @@ export class LoginService {
     return this._http.post(this.url + '/login', data, {headers: headers});
   }
 
+  validateToken(token: string) {
+    let data = {
+      token: token
+    };
+
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', this.auth);
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this._http.post(this.url+"/validate-token", data, {headers});
+    //200 si es un token valido  :  400 no es un token valido
+  }
+
 
 
 

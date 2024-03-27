@@ -12,7 +12,7 @@ export class HomeService {
   
   constructor( private _http: HttpClient ) { }
 
-  getHome(token: any, page: number) {
+  getCustomers(token: any, page: number) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.auth,
