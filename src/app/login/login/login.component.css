@@ -33,7 +33,7 @@
 	width:300px;
 	height:300px;
 }
-.login h1 { color: #333; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+/* .login h1 { color: white; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; font-size: 40px; } */
 
 input { 
 	width: 100%; 
