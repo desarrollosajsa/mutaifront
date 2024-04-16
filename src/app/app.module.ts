@@ -8,6 +8,9 @@ import { HomeModule } from './home/home.module';
 import { CasoModule } from './caso/caso.module';
 import { LoginModule } from './login/login.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FormsModule } from '@angular/forms';
+import { UserModule } from './user/user.module';
+
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
+    FormsModule,
     HomeModule,
+    UserModule,
     CasoModule
   ],
   providers: [
