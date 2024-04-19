@@ -1,85 +1,89 @@
 <app-header></app-header>
 <div class="container" style="margin-top: 10px">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item text-sm">
-                <a class="opacity-5 text-dark" routerLinkActive="router-link-active" href="#">
-                    <i class="fas fa-home"></i>
-                    Página principal
-                </a>
-            </li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-                {{ title }}
-            </li>
-        </ol>
-    </nav>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-sm">
+        <a class="opacity-5 text-dark" routerLinkActive="router-link-active" href="#">
+          <i class="fas fa-home"></i>
+          Página principal
+        </a>
+      </li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+        {{ title }}
+      </li>
+    </ol>
+  </nav>
 
-    <div class="card shadow mb-4" style="margin-top: 10px">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Cliente #{{ id }}</h6>
-        </div>
-
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <label>Teléfono</label>
-                    <input type="text" class="form-control" value="{{ detail.phone }}" readonly />
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <label>Estado</label>
-                    <input type="text" class="form-control" value="{{ detail.status }}" readonly />
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <label>Fecha Creación</label>
-                    <input type="text" class="form-control" value="{{ detail.createdat | date }}" readonly />
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <label>Fecha Actualización</label>
-                    <input type="text" class="form-control" value="{{ detail.updatedat | date }}" readonly />
-                </div>
-            </div>
-
-            <!-- Formulario -->
-            <form #myForm="ngForm" (ngSubmit)="updateDetail(myForm)">
-                <div class="row" style="margin-top: 15px">
-                  <h6 class="m-0 font-weight-bold text-primary">
-                    Origen: {{ detail.source_social }}
-                  </h6>
-                  <!-- Lado Izquierdo -->
-                  <div class="col-lg-8 col-md-8">
-
-                    <input type="hidden" class="form-control" name="id" [(ngModel)]="detail.id">
-
-                    <div class="row">
-                      <div class="col-lg-12 col-md-12">
-                        <label for="">Detalle necesidad del cliente</label>
-                        <textarea type="text" class="form-control" name="need_detail" [(ngModel)]="detail.need_detail"></textarea>
-                      </div>
-                      <div class="col-lg-12 col-md-12">
-                        <label for="">Detalle solución</label>
-                        <textarea type="text" class="form-control" name="solution_detail" [(ngModel)]="detail.solution_detail"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Lado Derecho -->
-                  <div class="col-lg-4 col-md-4">
-                    <div class="row">
-                      <div class="col-lg-12 col-md-12">
-                        <label for="">Estado asistencia</label>
-                        <select class="form-select" name="is_assisted" id="is_assisted" [(ngModel)]="detail.is_assisted">
-                          <option value="PENDIENTE">PENDIENTE</option>
-                          <option value="ESPERA">EN ESPERA</option>
-                          <option value="SOLUCIONADO">SOLUCIONADO</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-12 col-md-12 text-center" style="margin-top: 60px">
-                        <button class="btn btn-success" type="submit">Guardar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-
-        </div>
+  <div class="card shadow mb-4" style="margin-top: 10px">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Cliente #{{ id }}</h6>
     </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+          <label>Teléfono</label>
+          <input type="text" class="form-control" value="{{ detail.phone }}" readonly />
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+          <label>Estado</label>
+          <input type="text" class="form-control" value="{{ detail.status }}" readonly />
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+          <label>Fecha Creación</label>
+          <input type="text" class="form-control" value="{{ detail.createdat | date }}" readonly />
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+          <label>Fecha Actualización</label>
+          <input type="text" class="form-control" value="{{ detail.updatedat | date }}" readonly />
+        </div>
+      </div>
+
+      <hr>
+      <!-- Formulario -->
+      <form #myForm="ngForm" (ngSubmit)="updateDetail(myForm)">
+        <div class="row" style="margin-top: 15px">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Origen: {{ detail.source_social }}
+          </h6>
+          <!-- Lado Izquierdo -->
+          <div class="col-lg-8 col-md-8">
+            <input type="hidden" class="form-control" name="id" [(ngModel)]="detail.id" />
+
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <label for="">Detalle necesidad del cliente</label>
+                <textarea type="text" class="form-control" name="need_detail"
+                  [(ngModel)]="detail.need_detail" [disabled]="isDisabled" ></textarea>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <label for="">Detalle solución</label>
+                <textarea type="text" class="form-control" name="solution_detail"
+                  [(ngModel)]="detail.solution_detail" [disabled]="isDisabled" ></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Lado Derecho -->
+          <div class="col-lg-4 col-md-4">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <label for="">Estado asistencia</label>
+                <select class="form-select" name="is_assisted" id="is_assisted" [(ngModel)]="detail.is_assisted"
+                  [disabled]="isDisabled" >
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="ESPERA">EN ESPERA</option>
+                  <option value="SOLUCIONADO">SOLUCIONADO</option>
+                </select>
+              </div>
+
+              <div class="col-lg-12 col-md-12 text-center" style="margin-top: 60px"
+                *ngIf="!isDisabled">
+                <button class="btn btn-success" type="submit">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

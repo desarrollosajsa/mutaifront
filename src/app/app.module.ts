@@ -10,6 +10,7 @@ import { LoginModule } from './login/login.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule } from '@angular/forms';
 import { UserModule } from './user/user.module';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -25,7 +26,8 @@ import { UserModule } from './user/user.module';
     FormsModule,
     HomeModule,
     UserModule,
-    CasoModule
+    CasoModule,
+    ToastModule
   ],
   providers: [
     provideAnimationsAsync()

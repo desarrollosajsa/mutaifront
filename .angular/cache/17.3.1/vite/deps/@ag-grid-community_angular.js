@@ -20,7 +20,7 @@ import {
   ɵɵdirectiveInject,
   ɵɵgetInheritedFactory,
   ɵɵinject
-} from "./chunk-MLZWZ4PB.js";
+} from "./chunk-T6ZCZOHT.js";
 
 // node_modules/@ag-grid-community/core/dist/package/main.esm.mjs
 var __defProp = Object.defineProperty;

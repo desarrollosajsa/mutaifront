@@ -15,15 +15,20 @@
     </nav>
 
     <div class="card shadow mb-4" style="margin-top: 10px">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lista de usuarios</h6>
-        </div>
-
+        
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-12 col-md-12" style="text-align: end">
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"> <i class="fa-solid fa-users " ></i> Lista de usuarios</h6>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: end;" >
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-plus" ></i>
                         Agregar usuario
                     </button>
                 </div>
@@ -33,18 +38,18 @@
                         <table #dataTable class="table table-hover" id="table_users">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Usuario</th>
-                                    <th>Acciones</th>
+                                    <th style="text-align: start;" >#</th>
+                                    <th style="text-align: center;" >Nombre</th>
+                                    <th style="text-align: center;" >Usuario</th>
+                                    <th style="text-align: center;" >Acciones</th>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let item of users">
                                 <tr>
-                                    <td>{{ item.id }}</td>
-                                    <td>{{ item.first_name }} {{ item.last_name }}</td>
-                                    <td>{{ item.email }}</td>
-                                    <td>acciones</td>
+                                    <td style="text-align: start;" >{{ item.id }}</td>
+                                    <td style="text-align: center;" >{{ item.first_name }} {{ item.last_name }}</td>
+                                    <td style="text-align: center;" >{{ item.email }}</td>
+                                    <td style="text-align: center;" >acciones</td>
                                 </tr>
                             </tbody>
                         </table>
