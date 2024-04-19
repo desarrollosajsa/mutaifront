@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HomeService } from "../../../services/home.service";
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-customer-detail",
@@ -14,8 +15,10 @@ export class CustomerDetailComponent implements OnInit {
   resp :any;
   detail :any;
   id:number = 0 ;
+  isDisabled :boolean = false;
+  
 
-  constructor(private _router: ActivatedRoute, private _homeServ: HomeService) {}
+  constructor(private _router: ActivatedRoute, private _homeServ: HomeService,private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this._router.params.subscribe((params) => {
@@ -33,6 +36,11 @@ export class CustomerDetailComponent implements OnInit {
       console.log(this.resp);
       if(this.resp.status == 200) {
         this.detail = this.resp.data;
+
+        if(this.detail.is_assisted == 'SOLUCIONADO' ) {
+          this.isDisabled = true;
+        }
+
       }else{
         alert(this.resp.message);
       }
@@ -51,13 +59,25 @@ export class CustomerDetailComponent implements OnInit {
     this._homeServ.postUpdateCustomerDetail(localStorage.getItem("token"), params).subscribe((resp) => {
       this.resp = resp;
       if(this.resp.status == 200) {
+        this.showMessageSnackBar("Datos actualizados correctamente", "Cerrar");
         this.getCustomerDetail(this.id);
       }else{
-        alert(this.resp.message);
+        this.showMessageSnackBar(this.resp.message, "Cerrar");
+        // alert(this.resp.message);
       }
     })
 
     // console.log(params);
   }
+
+
+  showMessageSnackBar(message: string, titleButton: string) {
+    this._snackBar.open(message, titleButton, {
+      horizontalPosition: "end",
+      verticalPosition: "top",
+      duration: 4000,
+    });
+  }
+
 
 }

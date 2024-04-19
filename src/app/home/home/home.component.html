@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="container" style="margin-top: 10px">
-  <h1 style="margin-bottom: 10px">Página Principal</h1>
+  <h1 style="margin-bottom: 10px"> <i class="fa-solid fa-house" ></i> Página Principal</h1>
 
   <div class="row">
     <div class="card-header py-3">
@@ -116,27 +116,43 @@
         <table class="table table-hover table-small table-condensed" id="dataTable" width="100%" cellspacing="0">
           <thead style="color: white;">
             <tr>
-              <th>Teléfono</th>
-              <th>Origen</th>
-              <th>Estatus</th>
-              <th>Agente</th>
-              <th>Fecha Creación</th>
-              <th>Acciones</th>
+              <th style="text-align: center;" >#</th>
+              <th style="text-align: center;" >Teléfono</th>
+              <th style="text-align: center;" >Origen</th>
+              <th style="text-align: center;" >Estatus</th>
+              <th style="text-align: center;" >Agente</th>
+              <th style="text-align: center;" >Fecha Creación</th>
+              <th style="text-align: center;" >Acciones</th>
             </tr>
           </thead>
           <tbody *ngFor="let item of customers">
             <tr>
-              <td> {{item.phone}} </td>
-              <td> {{item.source_social}} </td>
-              <td> {{item.status}} </td>
-              <td> {{item.first_name}} {{item.last_name}} </td>
-              <td> {{item.createdat | date : 'dd/MM/yyyy H:mm' }} </td>
-              <td>
+              <td style="text-align: center;" > {{item.id}} </td>
+              <td style="text-align: center;" > {{item.phone}} </td>
+              <td style="text-align: center;" > {{item.source_social}} </td>
+              <td style="text-align: center;" > {{item.status}} </td>
+              <td style="text-align: center;" > {{item.first_name}} {{item.last_name}} </td>
+              <td style="text-align: center;" > {{item.createdat | date : 'dd/MM/yyyy H:mm' }} </td>
+              <td style="text-align: center;" >
 
-                <button class="btn btn-primary" style="font-size: 12px;" (click)="viewDetail(item.id)" > Ver Detalle </button>
+                <button class="btn btn-primary" style="font-size: 12px;" (click)="viewDetail(item.id)" > 
+                  <i class="fa-solid fa-eye" ></i>
+                  Ver Detalle 
+                </button>
               </td>
             </tr>
           </tbody>
+          <tfoot style="color: white;">
+            <tr>
+              <th style="text-align: center;" >#</th>
+              <th style="text-align: center;" >Teléfono</th>
+              <th style="text-align: center;" >Origen</th>
+              <th style="text-align: center;" >Estatus</th>
+              <th style="text-align: center;" >Agente</th>
+              <th style="text-align: center;" >Fecha Creación</th>
+              <th style="text-align: center;" >Acciones</th>
+            </tr>
+          </tfoot>
         </table>
       </div>
 
@@ -169,11 +185,11 @@
 
   <!-- Content Row -->
 
-  <div class="row">
-    <!-- Area Chart -->
+  <!-- <div class="row">
+
     <div class="col-xl-8 col-lg-7">
       <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
+        
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
           <div class="dropdown no-arrow">
@@ -190,7 +206,7 @@
             </div>
           </div>
         </div>
-        <!-- Card Body -->
+
         <div class="card-body">
           <div class="chart-area">
             <canvas id="myAreaChart"></canvas>
@@ -199,10 +215,8 @@
       </div>
     </div>
 
-    <!-- Pie Chart -->
     <div class="col-xl-4 col-lg-5">
       <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
           <div class="dropdown no-arrow">
@@ -219,7 +233,6 @@
             </div>
           </div>
         </div>
-        <!-- Card Body -->
         <div class="card-body">
           <div class="chart-pie pt-4 pb-2">
             <canvas id="myPieChart"></canvas>
@@ -238,7 +251,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Content Row -->
   <div class="row">
