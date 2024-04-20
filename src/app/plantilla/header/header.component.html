@@ -14,7 +14,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" style="color: white !important">Inicio</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAdmin" >
           <a class="nav-link" routerLink="/users" routerLinkActive="router-link-active">Usuarios</a>
         </li>
         <!-- <li class="nav-item dropdown">
@@ -32,6 +32,17 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li> -->
       </ul>
+
+      <div style="margin-right: 15px;" >
+        <p class="nav-item" >
+          <i *ngIf="isAdmin; else templateName" class="fa-solid fa-user-gear" ></i>
+          <ng-template #templateName>
+            <i class="fa-solid fa-user"></i>
+          </ng-template>
+          {{userLogged}}
+        </p>
+      </div>
+
       <form class="d-flex">
         <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
         <button class="btn bg-gradient-primary" (click)="logOut()" >

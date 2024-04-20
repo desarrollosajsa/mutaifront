@@ -3,8 +3,6 @@ import { HomeService } from "../../services/home.service";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
-import { MatTableDataSource } from "@angular/material/table";
-
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -22,6 +20,7 @@ export class HomeComponent implements OnInit {
   listUrl: any;
   customers: any;
   indicators: any;
+  isAdmin: boolean = false;
 
   constructor(
     private _homeServ: HomeService,
@@ -42,12 +41,13 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (res) => {
           this.responseUrl = res;
-          console.log(this.responseUrl);
+          // console.log(this.responseUrl.isAdmin);
           if (this.responseUrl.status == 200) {
             this.listUrl = this.responseUrl.data;
             this.customers = this.listUrl.customers;
             this.total_registers = this.listUrl.total_registers;
             this.indicators = this.listUrl.status_indicators;
+            this.isAdmin = this.responseUrl.isAdmin;
           }
         },
         (error) => {

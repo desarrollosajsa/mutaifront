@@ -3,7 +3,7 @@
 <div class="container" style="margin-top: 10px">
   <h1 style="margin-bottom: 10px"> <i class="fa-solid fa-house" ></i> Página Principal</h1>
 
-  <div class="row">
+  <div class="row"  *ngIf="isAdmin" >
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Indicadores</h6>
     </div>
@@ -98,7 +98,7 @@
   </div>
 
   <!-- DataTales Example -->
-  <div class="card shadow mb-4">
+  <div class="card shadow mb-4" style="margin-top: 15px;" >
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Potenciales Clientes</h6>
     </div>

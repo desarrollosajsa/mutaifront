@@ -32,10 +32,11 @@ export class CustomerDetailComponent implements OnInit {
   getCustomerDetail(id:number) {
     this._homeServ.getCustomerDetail(localStorage.getItem("token"), id).subscribe((resp) => {
       this.resp = resp;
-      console.log("function getCustomerDetail");
-      console.log(this.resp);
+      // console.log(this.resp);
       if(this.resp.status == 200) {
         this.detail = this.resp.data;
+
+        // console.log(this.detail.history);
 
         if(this.detail.is_assisted == 'SOLUCIONADO' ) {
           this.isDisabled = true;
@@ -43,6 +44,7 @@ export class CustomerDetailComponent implements OnInit {
 
       }else{
         alert(this.resp.message);
+        this.showMessageSnackBar(this.resp.message);
       }
     })
   }
@@ -71,7 +73,7 @@ export class CustomerDetailComponent implements OnInit {
   }
 
 
-  showMessageSnackBar(message: string, titleButton: string) {
+  showMessageSnackBar(message: string, titleButton: string = "Cerrar") {
     this._snackBar.open(message, titleButton, {
       horizontalPosition: "end",
       verticalPosition: "top",
