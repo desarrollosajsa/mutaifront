@@ -34,12 +34,12 @@ export class UserListComponent {
   }
 
   onSubmit() {
-    console.log(this.formData);
+    // console.log(this.formData);
     this._servUser
       .postUsersCreate(localStorage.getItem("token"), this.formData)
       .subscribe((resp) => {
         this.resp = resp;
-        console.log(this.resp);
+        // console.log(this.resp);
         if (this.resp.status == 200) {
           this.getUsers();
           this.showMessageSnackBar("Usuario creado con exito", "Cerrar");

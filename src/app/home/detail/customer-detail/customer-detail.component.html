@@ -39,51 +39,107 @@
         </div>
       </div>
 
+      <div class="row" style="margin-top: 10px;" >
+        <h6 class="m-0 font-weight-bold text-primary">
+          Origen Lead: {{ detail.source_social }}
+        </h6>
+      </div>
+
       <hr>
-      <!-- Formulario -->
-      <form #myForm="ngForm" (ngSubmit)="updateDetail(myForm)">
-        <div class="row" style="margin-top: 15px">
-          <h6 class="m-0 font-weight-bold text-primary">
-            Origen: {{ detail.source_social }}
-          </h6>
-          <!-- Lado Izquierdo -->
-          <div class="col-lg-8 col-md-8">
-            <input type="hidden" class="form-control" name="id" [(ngModel)]="detail.id" />
 
-            <div class="row">
-              <div class="col-lg-12 col-md-12">
-                <label for="">Detalle necesidad del cliente</label>
-                <textarea type="text" class="form-control" name="need_detail"
-                  [(ngModel)]="detail.need_detail" [disabled]="isDisabled" ></textarea>
+      <!-- Tabs -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+            role="tab" aria-controls="home" aria-selected="true">Detalle</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+            role="tab" aria-controls="profile" aria-selected="false">Historial</button>
+        </li>
+      </ul>
+
+      <!-- Contenido Tabs -->
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+          <!-- Formulario -->
+          <form #myForm="ngForm" (ngSubmit)="updateDetail(myForm)">
+            <div class="row" style="margin-top: 15px">
+              <!-- Lado Izquierdo -->
+              <div class="col-lg-8 col-md-8">
+                <input type="hidden" class="form-control" name="id" [(ngModel)]="detail.id" />
+
+                <div class="row">
+                  <div class="col-lg-12 col-md-12">
+                    <label for="">Detalle necesidad del cliente</label>
+                    <textarea type="text" class="form-control" name="need_detail" [(ngModel)]="detail.need_detail"
+                      [disabled]="isDisabled"></textarea>
+                  </div>
+                  <div class="col-lg-12 col-md-12">
+                    <label for="">Detalle solución</label>
+                    <textarea type="text" class="form-control" name="solution_detail"
+                      [(ngModel)]="detail.solution_detail" [disabled]="isDisabled"></textarea>
+                  </div>
+                </div>
               </div>
-              <div class="col-lg-12 col-md-12">
-                <label for="">Detalle solución</label>
-                <textarea type="text" class="form-control" name="solution_detail"
-                  [(ngModel)]="detail.solution_detail" [disabled]="isDisabled" ></textarea>
+              <!-- Lado Derecho -->
+              <div class="col-lg-4 col-md-4">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12">
+                    <label for="">Estado asistencia</label>
+                    <select class="form-select" name="is_assisted" id="is_assisted" [(ngModel)]="detail.is_assisted"
+                      [disabled]="isDisabled">
+                      <option value="PENDIENTE">PENDIENTE</option>
+                      <option value="ESPERA">EN ESPERA</option>
+                      <option value="SOLUCIONADO">SOLUCIONADO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 text-center" style="margin-top: 60px" *ngIf="!isDisabled">
+                    <button class="btn btn-success" type="submit">Guardar</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Lado Derecho -->
-          <div class="col-lg-4 col-md-4">
-            <div class="row">
-              <div class="col-lg-12 col-md-12">
-                <label for="">Estado asistencia</label>
-                <select class="form-select" name="is_assisted" id="is_assisted" [(ngModel)]="detail.is_assisted"
-                  [disabled]="isDisabled" >
-                  <option value="PENDIENTE">PENDIENTE</option>
-                  <option value="ESPERA">EN ESPERA</option>
-                  <option value="SOLUCIONADO">SOLUCIONADO</option>
-                </select>
-              </div>
-
-              <div class="col-lg-12 col-md-12 text-center" style="margin-top: 60px"
-                *ngIf="!isDisabled">
-                <button class="btn btn-success" type="submit">Guardar</button>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
-      </form>
+
+        <!-- Contenido Hitorial -->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="table responsive">
+                <table class="table table-hover table-small table-condensed">
+                  <thead>
+                    <tr>
+                      <th style="text-align: start;" >Fecha Atención</th>
+                      <th style="text-align: center;" >Usuario</th>
+                      <th style="text-align: center;" >Estado</th>
+                      <th style="text-align: center;" >Comentario</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let item of detail.history">
+                    <tr>
+                      <td style="text-align: start;" >{{ item.createat }} </td>
+                      <td style="text-align: center;" > {{item.created_by.last_name }} {{item.created_by.first_name}} </td>
+                      <td style="text-align: center;" > {{item.status}} </td>
+                      <td style="text-align: center;" > {{item.description}} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
     </div>
   </div>
 </div>

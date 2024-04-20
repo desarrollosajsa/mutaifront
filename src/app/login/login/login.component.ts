@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
-import { NgForm } from "@angular/forms";
 import { LoginModel } from "../models/Login.model";
 import { LoginService } from "../../services/login.service";
 import { Router } from "@angular/router";
 import { isPlatformBrowser } from "@angular/common";
-import { MessageService } from "primeng/api";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import * as $ from 'jquery';
@@ -45,7 +43,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token", this.responseUserUrl.user.token);
           localStorage.setItem("first_name",this.responseUserUrl.user.first_name);
           localStorage.setItem("last_name",this.responseUserUrl.user.last_name);
-          this.showMessageSnackBar("Bienvenido "+this.responseUserUrl.user.first_name ,"Cerrar"); 
+          this.showMessageSnackBar("Bienvenido "+this.responseUserUrl.user.first_name+" "+this.responseUserUrl.user.last_name ,"Cerrar"); 
           this._router.navigate(["/home"]);          
         } else {
           this.showMessageSnackBar(this.responseUserUrl.message,"Cerrar"); 

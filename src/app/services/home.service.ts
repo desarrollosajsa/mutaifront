@@ -37,10 +37,6 @@ export class HomeService {
 
   postUpdateCustomerDetail(token: any, data: any) {
 
-    let params = {
-      
-    };
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.auth,
