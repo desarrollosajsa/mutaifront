@@ -1,16 +1,16 @@
 <app-header></app-header>
 
 <div class="container" style="margin-top: 10px">
-  <h1 style="margin-bottom: 10px"> <i class="fa-solid fa-house" ></i> Página Principal</h1>
+  <h1 style="margin-bottom: 10px"> <i class="fa-solid fa-house"></i> Página Principal</h1>
 
-  <div class="row"  *ngIf="isAdmin" >
+  <div class="row" *ngIf="isAdmin">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Indicadores</h6>
     </div>
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-primary shadow h-100 py-2">
-        
+
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
@@ -98,59 +98,97 @@
   </div>
 
   <!-- DataTales Example -->
-  <div class="card shadow mb-4" style="margin-top: 15px;" >
+  <div class="card shadow mb-4" style="margin-top: 15px;">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Potenciales Clientes</h6>
     </div>
     <div class="card-body">
-      <div class="row" >
-        <div class="col-lg-6 col-md-6" >
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
           Registros {{ (page*limit) - 4 }} - {{total_registers}}
         </div>
-        <div class="col-lg-6 col-md-6" style="text-align: end;" >
-      Registros totales {{total_registers}}
-
+        <div class="col-lg-6 col-md-6" style="text-align: end;">
+          Registros totales {{total_registers}}
         </div>
       </div>
+
+      <!-- Tabs -->
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-lg-12 col-md-12">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true"
+                (click)="changeStatus('SIN-ATENDER', '')">SIN-ATENDER</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false"
+                (click)="changeStatus('ATENDIDO','')">ATENDIDOS</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter is_assisted -->
+      <div class="row" *ngIf="status == 'ATENDIDO'">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+          <p>
+            <a><span class="badge rounded-pill bg-primary">Filtro:{{is_assisted}}</span></a>
+            <a style="cursor: pointer;"><span class="badge rounded-pill bg-dark"
+                (click)="changeStatus('ATENDIDO', '')">Todos</span> </a>
+            <a style="cursor: pointer;"><span class="badge rounded-pill bg-warning"
+                (click)="changeStatus('ATENDIDO', 'PENDIENTE')">Pendiente</span> </a>
+            <a style="cursor: pointer;"><span class="badge rounded-pill bg-info"
+                (click)="changeStatus('ATENDIDO', 'ESPERA')">En espera</span> </a>
+            <a style="cursor: pointer;"><span class="badge rounded-pill bg-success"
+                (click)="changeStatus('ATENDIDO', 'SOLUCIONADO')">Solucionado</span> </a>
+          </p>
+        </div>
+      </div>
+
       <div class="table-responsive" height="40px" style="overflow-y: scroll;">
         <table class="table table-hover table-small table-condensed" id="dataTable" width="100%" cellspacing="0">
           <thead style="color: white;">
             <tr>
-              <th style="text-align: center;" >#</th>
-              <th style="text-align: center;" >Teléfono</th>
-              <th style="text-align: center;" >Origen</th>
-              <th style="text-align: center;" >Estatus</th>
-              <th style="text-align: center;" >Agente</th>
-              <th style="text-align: center;" >Fecha Creación</th>
-              <th style="text-align: center;" >Acciones</th>
+              <th style="text-align: center;">#</th>
+              <th style="text-align: center;">Teléfono</th>
+              <th style="text-align: center;">Origen</th>
+              <th style="text-align: center;">Estatus</th>
+              <th style="text-align: center;">Agente</th>
+              <th style="text-align: center;">Es asistido</th>
+              <th style="text-align: center;">Fecha Creación</th>
+              <th style="text-align: center;">Acciones</th>
             </tr>
           </thead>
           <tbody *ngFor="let item of customers">
             <tr>
-              <td style="text-align: center;" > {{item.id}} </td>
-              <td style="text-align: center;" > {{item.phone}} </td>
-              <td style="text-align: center;" > {{item.source_social}} </td>
-              <td style="text-align: center;" > {{item.status}} </td>
-              <td style="text-align: center;" > {{item.first_name}} {{item.last_name}} </td>
-              <td style="text-align: center;" > {{item.createdat | date : 'dd/MM/yyyy H:mm' }} </td>
-              <td style="text-align: center;" >
+              <td style="text-align: center;"> {{item.id}} </td>
+              <td style="text-align: center;"> {{item.phone}} </td>
+              <td style="text-align: center;"> {{item.source_social}} </td>
+              <td style="text-align: center;"> {{item.status}} </td>
+              <td style="text-align: center;"> {{item.first_name}} {{item.last_name}} </td>
+              <td style="text-align: center;"> {{item.is_assisted}} </td>
+              <td style="text-align: center;"> {{item.createdat | date : 'dd/MM/yyyy H:mm' }} </td>
+              <td style="text-align: center;">
 
-                <button class="btn btn-primary" style="font-size: 12px;" (click)="viewDetail(item.id)" > 
-                  <i class="fa-solid fa-eye" ></i>
-                  Ver Detalle 
+                <button class="btn btn-primary" style="font-size: 12px;" (click)="viewDetail(item.id)">
+                  <i class="fa-solid fa-eye"></i>
+                  Ver Detalle
                 </button>
               </td>
             </tr>
           </tbody>
           <tfoot style="color: white;">
             <tr>
-              <th style="text-align: center;" >#</th>
-              <th style="text-align: center;" >Teléfono</th>
-              <th style="text-align: center;" >Origen</th>
-              <th style="text-align: center;" >Estatus</th>
-              <th style="text-align: center;" >Agente</th>
-              <th style="text-align: center;" >Fecha Creación</th>
-              <th style="text-align: center;" >Acciones</th>
+              <th style="text-align: center;">#</th>
+              <th style="text-align: center;">Teléfono</th>
+              <th style="text-align: center;">Origen</th>
+              <th style="text-align: center;">Estatus</th>
+              <th style="text-align: center;">Agente</th>
+              <th style="text-align: center;">Es Asistido</th>
+              <th style="text-align: center;">Fecha Creación</th>
+              <th style="text-align: center;">Acciones</th>
             </tr>
           </tfoot>
         </table>
@@ -170,7 +208,7 @@
         </div>
 
         <div class="col-lg-4 col-md-4">
-          <div *ngIf="(page * limit) < total_registers " >
+          <div *ngIf="(page * limit) < total_registers ">
             <button class="btn btn-info" (click)="nextPage()">
               <i class="fa-solid fa-chevron-right"></i>
             </button>
@@ -182,6 +220,34 @@
 
     </div>
   </div>
+
+  <!-- Embebido del Looker studio -->
+
+
+
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Estadísticas</h6>
+        </div>
+
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col-lg-12">
+              <iframe width="100%" height="600px"
+                src="https://lookerstudio.google.com/embed/reporting/21ada6b7-5f44-4487-a747-7e156709fa56/page/P3AzD"
+                frameborder="0" style="border:0" allowfullscreen
+                sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- Content Row -->
 
@@ -253,11 +319,8 @@
     </div>
   </div> -->
 
-  <!-- Content Row -->
-  <div class="row">
-    <!-- Content Column -->
+  <!-- <div class="row">
     <div class="col-lg-6 mb-4">
-      <!-- Project Card Example -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Linkeding</h6>
@@ -301,7 +364,6 @@
         </div>
       </div>
 
-      <!-- Color System -->
       <div class="row">
         <div class="col-lg-6 mb-4">
           <div class="card bg-primary text-white shadow">
@@ -371,7 +433,6 @@
     </div>
 
     <div class="col-lg-6 mb-4">
-      <!-- Illustrations -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
@@ -391,7 +452,6 @@
         </div>
       </div>
 
-      <!-- Approach -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">
@@ -412,4 +472,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
