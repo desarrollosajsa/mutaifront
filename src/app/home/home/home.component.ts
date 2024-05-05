@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   offset = 0;
   total_registers: any;
   word = "";
+  status = "SIN-ATENDER";
+  is_assisted = "";
   limit = 5;
 
   responseUrl: any;
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   customers: any;
   indicators: any;
   isAdmin: boolean = false;
+  
 
   constructor(
     private _homeServ: HomeService,
@@ -37,11 +40,11 @@ export class HomeComponent implements OnInit {
   getCustomers() {
 
     this._homeServ
-      .getCustomers(this.token, this.offset, this.word, this.limit)
+      .getCustomers(this.token, this.offset, this.word, this.limit, this.status, this.is_assisted)
       .subscribe(
         (res) => {
           this.responseUrl = res;
-          // console.log(this.responseUrl.isAdmin);
+          // console.log(this.responseUrl);
           if (this.responseUrl.status == 200) {
             this.listUrl = this.responseUrl.data;
             this.customers = this.listUrl.customers;
@@ -70,6 +73,13 @@ export class HomeComponent implements OnInit {
 
   viewDetail(id: number) {
     this._router.navigate(["/customer-detail", id]);
+  }
+
+  changeStatus(status: string, is_assisted: string) {
+    // alert(is_assisted);
+    this.status = status;
+    this.is_assisted = is_assisted
+    this.getCustomers();
   }
 
 

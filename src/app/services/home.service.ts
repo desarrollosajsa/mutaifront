@@ -12,11 +12,13 @@ export class HomeService {
   
   constructor( private _http: HttpClient ) { }
 
-  getCustomers(token: any,offset: number,word: string,limit: number) {
+  getCustomers(token: any,offset: number,word: string,limit: number,status: string,is_assisted: string) {
     let params = {
       offset: offset,
       limit: limit,
-      word: word
+      word: word,
+      status: status,
+      is_assisted: is_assisted
     };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
